@@ -7,22 +7,25 @@
     <EditText
         android:id="@+id/etName"
         android:hint="Item Name"
+        android:text=""
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-    <EditText
-        android:id="@+id/etCategory"
-        android:text="placeholder"
-        android:inputType="textFilter"
+    <Spinner
+        android:id="@+id/spCategory"
+        android:text=""
+        android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     <EditText
         android:id="@+id/etDescription"
         android:hint="Description"
+        android:text=""
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     <EditText
         android:id="@+id/etPrice"
         android:hint="0.0"
+        android:text=""
         android:inputType="numberDecimal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

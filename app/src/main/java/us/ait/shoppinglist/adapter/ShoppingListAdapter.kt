@@ -12,6 +12,7 @@ import us.ait.shoppinglist.ScrollingActivity
 import us.ait.shoppinglist.data.AppDatabase
 import us.ait.shoppinglist.data.ShoppingItem
 import us.ait.shoppinglist.touch.ShoppingTouchHelperCallBack
+import java.lang.RuntimeException
 import java.util.*
 
 class ShoppingListAdapter : Adapter<ShoppingListAdapter.ViewHolder>, ShoppingTouchHelperCallBack {
@@ -38,8 +39,22 @@ class ShoppingListAdapter : Adapter<ShoppingListAdapter.ViewHolder>, ShoppingTou
         holder.cbPurchased.text = item.itemName
         holder.cbPurchased.isChecked = item.purchased
 
-        holder.tvCategory.text = item.itemCategory
         holder.tvPrice.text = item.itemPrice.toString()
+
+        // TODO(implement the categories)
+        when(item.itemCategory){
+            0 -> holder.itemIcon.setImageResource(R.drawable.ic_add_circle_outline)
+            1 -> holder.itemIcon.setImageResource(R.drawable.ic_add_circle_outline)
+            2 -> holder.itemIcon.setImageResource(R.drawable.ic_launcher_foreground)
+            3 -> holder.itemIcon.setImageResource(R.drawable.ic_launcher_background)
+            4 -> holder.itemIcon.setImageResource(R.drawable.ic_launcher_background)
+            else-> {
+                throw RuntimeException("The category does not exist")
+            }
+        }
+
+        holder.tvName.text = item.itemName
+
         holder.btnDelete.setOnClickListener {
             deleteItem(holder.adapterPosition)
         }
@@ -106,12 +121,12 @@ class ShoppingListAdapter : Adapter<ShoppingListAdapter.ViewHolder>, ShoppingTou
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val cbPurchased = itemView.cbPurchased
-        val tvCategory = itemView.tvName
+        val tvName = itemView.tvName
         val tvPrice = itemView.tvPrice
         val btnDelete = itemView.btnDelete
         val btnEdit = itemView.btnEdit
         val btnDetails = itemView.btnDetails
-//        val itemIcon = itemView.itemIcon
+        val itemIcon = itemView.itemIcon
     }
 
 }

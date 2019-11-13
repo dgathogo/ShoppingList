@@ -72,20 +72,17 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
 
             runOnUiThread {
                 shoppingListAdapter = ShoppingListAdapter(this, shoppingList)
-                recyclerTodo.adapter = shoppingListAdapter
+                recyclerShoppingItem.adapter = shoppingListAdapter
 
                 var itemDecoration = DividerItemDecoration(
                     this,
                     DividerItemDecoration.VERTICAL
                 )
-                recyclerTodo.addItemDecoration(itemDecoration)
-
-                //recyclerTodo.layoutManager =
-                //    GridLayoutManager(this, 2)
+                recyclerShoppingItem.addItemDecoration(itemDecoration)
 
                 val callback = ShoppingRecyclerTouchCallBack(shoppingListAdapter)
                 val touchHelper = ItemTouchHelper(callback)
-                touchHelper.attachToRecyclerView(recyclerTodo)
+                touchHelper.attachToRecyclerView(recyclerShoppingItem)
             }
         }.start()
     }
