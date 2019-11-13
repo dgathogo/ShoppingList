@@ -4,8 +4,8 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
 
-class ShoppingRecyclerTouchCallBack(private val todoTouchHelperAdapter: ShoppingTouchHelperCallBack)
-    : ItemTouchHelper.Callback() {
+class ShoppingRecyclerTouchCallBack(private val todoTouchHelperAdapter: ShoppingTouchHelperCallBack) :
+    ItemTouchHelper.Callback() {
 
     override fun isLongPressDragEnabled(): Boolean {
         return true
@@ -15,17 +15,23 @@ class ShoppingRecyclerTouchCallBack(private val todoTouchHelperAdapter: Shopping
         return true
     }
 
-    override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
+    override fun getMovementFlags(
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder
+    ): Int {
         val dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN
         val swipeFlags = ItemTouchHelper.START or ItemTouchHelper.END
         return ItemTouchHelper.Callback.makeMovementFlags(dragFlags, swipeFlags)
     }
 
-    override fun onMove(recyclerView: RecyclerView,
-                        viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+    override fun onMove(
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder
+    ): Boolean {
         todoTouchHelperAdapter.onItemMoved(
             viewHolder.adapterPosition,
-            target.adapterPosition)
+            target.adapterPosition
+        )
         return true
     }
 

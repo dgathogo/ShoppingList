@@ -13,4 +13,4 @@ data class ShoppingItem(
     @ColumnInfo(name = "category") var itemCategory: Int,
     @ColumnInfo(name = "description") var itemDescription: String,
     @ColumnInfo(name = "purchased") var purchased: Boolean
-): Serializable
+) : Serializable

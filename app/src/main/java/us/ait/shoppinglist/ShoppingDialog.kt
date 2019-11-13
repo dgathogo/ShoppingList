@@ -20,13 +20,13 @@ class ShoppingDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
         fun itemUpdated(item: ShoppingItem)
     }
 
-    private lateinit var shoppingHandler : ShoppingHandler
+    private lateinit var shoppingHandler: ShoppingHandler
     private lateinit var etItemName: EditText
     private lateinit var etItemDescription: EditText
     private lateinit var spinnerItemCategory: Spinner
     private lateinit var etItemPrice: EditText
 
-    var isEditMode : Boolean = true
+    var isEditMode: Boolean = true
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -56,9 +56,14 @@ class ShoppingDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
         spinnerItemCategory = rootView.spCategory
         builder.setView(rootView)
 
-        val adapter = ArrayAdapter.createFromResource(context as ScrollingActivity, R.array.Categories, android.R.layout.simple_spinner_dropdown_item)
+        val adapter = ArrayAdapter.createFromResource(
+            context as ScrollingActivity,
+            R.array.Categories,
+            android.R.layout.simple_spinner_dropdown_item
+        )
         adapter.setDropDownViewResource(
-            android.R.layout.simple_spinner_dropdown_item)
+            android.R.layout.simple_spinner_dropdown_item
+        )
         spinnerItemCategory.adapter = adapter
         spinnerItemCategory.onItemSelectedListener = this
 
@@ -68,7 +73,8 @@ class ShoppingDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
 
         if (isEditMode) {
             builder.setTitle("Edit Shopping Item")
-            var shoppingItem = arguments?.getSerializable(ScrollingActivity.KEY_ITEM) as ShoppingItem
+            var shoppingItem =
+                arguments?.getSerializable(ScrollingActivity.KEY_ITEM) as ShoppingItem
 
             etItemName.setText(shoppingItem.itemName)
             etItemDescription.setText(shoppingItem.itemDescription)
@@ -76,8 +82,8 @@ class ShoppingDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
             spinnerItemCategory.setSelection(shoppingItem.itemCategory)
         }
 
-        builder.setPositiveButton("SAVE") {
-                dialog, witch -> // empty
+        builder.setPositiveButton("SAVE") { dialog, witch ->
+            // empty
         }
 
         return builder.create()
@@ -89,7 +95,7 @@ class ShoppingDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
         val positiveButton = (dialog as AlertDialog).getButton(Dialog.BUTTON_POSITIVE)
         positiveButton.setOnClickListener {
             if (etItemName.text.isNotEmpty()) {
-                if (isEditMode){
+                if (isEditMode) {
                     handleShoppingItemEdit()
                 } else {
                     handleShoppingItemCreate()
@@ -102,7 +108,8 @@ class ShoppingDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
             }
         }
     }
-    override fun onNothingSelected(parent: AdapterView<*>?) { }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {}
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {}
 
     private fun handleShoppingItemEdit() {
@@ -116,6 +123,7 @@ class ShoppingDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
 
         shoppingHandler.itemUpdated(itemToEdit)
     }
+
     private fun handleShoppingItemCreate() {
         shoppingHandler.itemCreated(
             ShoppingItem(

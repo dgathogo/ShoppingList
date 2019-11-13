@@ -6,10 +6,10 @@ import androidx.room.*
 interface ShoppingItemDao {
 
     @Query("SELECT * FROM shoppingitem")
-    fun getAllItems() : List<ShoppingItem>
+    fun getAllItems(): List<ShoppingItem>
 
     @Insert
-    fun addItem(shoppingItem: ShoppingItem) : Long
+    fun addItem(shoppingItem: ShoppingItem): Long
 
     @Delete
     fun deleteItem(shoppingItem: ShoppingItem)

@@ -18,16 +18,18 @@ import java.util.*
 class ShoppingListAdapter : Adapter<ShoppingListAdapter.ViewHolder>, ShoppingTouchHelperCallBack {
 
     private val shoppingList = mutableListOf<ShoppingItem>()
-    private val context : Context
-    constructor(context: Context, shoppingItems: List<ShoppingItem> ) {
+    private val context: Context
+
+    constructor(context: Context, shoppingItems: List<ShoppingItem>) {
         this.context = context
         shoppingList.addAll(shoppingItems)
     }
+
     override fun getItemCount(): Int {
         return shoppingList.size
     }
 
-    override fun onCreateViewHolder( parent: ViewGroup,viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val shoppingListRow = LayoutInflater.from(context).inflate(
             R.layout.item_row, parent, false
         )
@@ -42,13 +44,13 @@ class ShoppingListAdapter : Adapter<ShoppingListAdapter.ViewHolder>, ShoppingTou
         holder.tvPrice.text = item.itemPrice.toString()
 
         // TODO(implement the categories)
-        when(item.itemCategory){
+        when (item.itemCategory) {
             0 -> holder.itemIcon.setImageResource(R.drawable.ic_add_circle_outline)
             1 -> holder.itemIcon.setImageResource(R.drawable.ic_add_circle_outline)
             2 -> holder.itemIcon.setImageResource(R.drawable.ic_launcher_foreground)
             3 -> holder.itemIcon.setImageResource(R.drawable.ic_launcher_background)
             4 -> holder.itemIcon.setImageResource(R.drawable.ic_launcher_background)
-            else-> {
+            else -> {
                 throw RuntimeException("The category does not exist")
             }
         }
@@ -69,7 +71,7 @@ class ShoppingListAdapter : Adapter<ShoppingListAdapter.ViewHolder>, ShoppingTou
             )
         }
         holder.btnDetails.setOnClickListener {
-            TODO("show dialog with item details")
+            (context as ScrollingActivity).showDetailsDialog(item)
         }
     }
 
@@ -93,7 +95,7 @@ class ShoppingListAdapter : Adapter<ShoppingListAdapter.ViewHolder>, ShoppingTou
     }
 
     fun deleteItem(index: Int) {
-        Thread{
+        Thread {
             AppDatabase.getInstance(context).shoppingItemDao().deleteItem(shoppingList[index])
             (context as ScrollingActivity).runOnUiThread {
                 shoppingList.removeAt(index)

@@ -2,10 +2,7 @@ package us.ait.shoppinglist
 
 import android.os.Bundle
 import android.preference.PreferenceManager
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import kotlinx.android.synthetic.main.activity_scrolling.*
@@ -14,7 +11,6 @@ import us.ait.shoppinglist.adapter.ShoppingListAdapter
 import us.ait.shoppinglist.data.AppDatabase
 import us.ait.shoppinglist.data.ShoppingItem
 import us.ait.shoppinglist.touch.ShoppingRecyclerTouchCallBack
-import us.ait.shoppinglist.touch.ShoppingTouchHelperCallBack
 
 class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
 
@@ -23,6 +19,7 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
         val KEY_STARTED = "KEY_STARTED"
         val TAG_ITEM_DIALOG = "TAG_ITEM_DIALOG"
         val TAG_ITEM_EDIT = "TAG_ITEM_EDIT"
+        val TAG_ITEM_DETAILS = "TAG_ITEM_DETAILS"
     }
 
     lateinit var shoppingListAdapter: ShoppingListAdapter
@@ -45,13 +42,14 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
             shoppingListAdapter.deleteAll()
 
         }
-        if(!wasStartedBefore()) {
+        if (!wasStartedBefore()) {
             MaterialTapTargetPrompt.Builder(this)
                 .setTarget(R.id.fab)
                 .setPrimaryText("New item")
                 .setSecondaryText("Click here to create new items")
                 .show()
-            saveWasStarted()}
+            saveWasStarted()
+        }
     }
 
     fun saveWasStarted() {
@@ -60,7 +58,7 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
         editor.apply()
     }
 
-    fun wasStartedBefore() : Boolean {
+    fun wasStartedBefore(): Boolean {
         var sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
         return sharedPref.getBoolean(KEY_STARTED, false)
     }
@@ -99,6 +97,15 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
         editDialog.arguments = bundle
 
         editDialog.show(supportFragmentManager, TAG_ITEM_EDIT)
+    }
+
+    fun showDetailsDialog (item: ShoppingItem) {
+        val detailsDialog = DetailsDialog()
+        val bundle = Bundle()
+        bundle.putSerializable(KEY_ITEM, item)
+        detailsDialog.arguments = bundle
+
+        detailsDialog.show(supportFragmentManager, TAG_ITEM_DETAILS)
     }
 
     fun saveTodo(shoppingItem: ShoppingItem) {
