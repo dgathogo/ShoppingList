@@ -35,7 +35,7 @@
             card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvAmount"
+            android:id="@+id/tvPrice"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -54,6 +54,16 @@
             card_view:layout_constraintTop_toTopOf="parent" />
 
         <Button
+            android:id="@+id/btnEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Edit"
+            card_view:layout_constraintEnd_toEndOf="@+id/btnDelete"
+            card_view:layout_constraintStart_toStartOf="@+id/btnDelete"
+            card_view:layout_constraintTop_toBottomOf="@+id/btnDelete" />
+
+        <Button
             android:id="@+id/btnDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -70,8 +80,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Purchased"
-            card_view:layout_constraintStart_toStartOf="@+id/tvAmount"
-            card_view:layout_constraintTop_toBottomOf="@+id/tvAmount" />
+            card_view:layout_constraintStart_toStartOf="@+id/tvPrice"
+            card_view:layout_constraintTop_toBottomOf="@+id/tvPrice" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

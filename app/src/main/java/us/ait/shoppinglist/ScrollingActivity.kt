@@ -1,38 +1,129 @@
 package us.ait.shoppinglist
 
 import android.os.Bundle
+import android.preference.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import kotlinx.android.synthetic.main.activity_scrolling.*
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt
+import us.ait.shoppinglist.adapter.ShoppingListAdapter
+import us.ait.shoppinglist.data.AppDatabase
+import us.ait.shoppinglist.data.ShoppingItem
+import us.ait.shoppinglist.touch.ShoppingRecyclerTouchCallBack
+import us.ait.shoppinglist.touch.ShoppingTouchHelperCallBack
 
-class ScrollingActivity : AppCompatActivity() {
+class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
+
+    companion object {
+        val KEY_ITEM = "KEY_ITEM"
+        val KEY_STARTED = "KEY_STARTED"
+        val TAG_ITEM_DIALOG = "TAG_ITEM_DIALOG"
+        val TAG_ITEM_EDIT = "TAG_ITEM_EDIT"
+    }
+
+    lateinit var shoppingListAdapter: ShoppingListAdapter
+
+    var editIndex = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scrolling)
+
         setSupportActionBar(toolbar)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+
+        initRecyclerView()
+
+
+        fab.setOnClickListener {
+            showAddShoppingItemDialog()
         }
+        fabDeleteAll.setOnClickListener {
+            shoppingListAdapter.deleteAll()
+
+        }
+        if(!wasStartedBefore()) {
+            MaterialTapTargetPrompt.Builder(this)
+                .setTarget(R.id.fab)
+                .setPrimaryText("New item")
+                .setSecondaryText("Click here to create new items")
+                .show()
+            saveWasStarted()}
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_scrolling, menu)
-        return true
+    fun saveWasStarted() {
+        var sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
+        var editor = sharedPref.edit()
+        editor.apply()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+    fun wasStartedBefore() : Boolean {
+        var sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
+        return sharedPref.getBoolean(KEY_STARTED, false)
+    }
 
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
+    private fun initRecyclerView() {
+        Thread {
+            var shoppingList =
+                AppDatabase.getInstance(this@ScrollingActivity).shoppingItemDao().getAllItems()
+
+            runOnUiThread {
+                shoppingListAdapter = ShoppingListAdapter(this, shoppingList)
+                recyclerTodo.adapter = shoppingListAdapter
+
+                var itemDecoration = DividerItemDecoration(
+                    this,
+                    DividerItemDecoration.VERTICAL
+                )
+                recyclerTodo.addItemDecoration(itemDecoration)
+
+                //recyclerTodo.layoutManager =
+                //    GridLayoutManager(this, 2)
+
+                val callback = ShoppingRecyclerTouchCallBack(shoppingListAdapter)
+                val touchHelper = ItemTouchHelper(callback)
+                touchHelper.attachToRecyclerView(recyclerTodo)
+            }
+        }.start()
+    }
+
+    fun showAddShoppingItemDialog() {
+        ShoppingDialog().show(supportFragmentManager, TAG_ITEM_DIALOG)
+    }
+
+    fun showEditItemDialog(itemEdit: ShoppingItem, idx: Int) {
+        editIndex = idx
+        val editDialog = ShoppingDialog()
+        val bundle = Bundle()
+        bundle.putSerializable(KEY_ITEM, itemEdit)
+        editDialog.arguments = bundle
+
+        editDialog.show(supportFragmentManager, TAG_ITEM_EDIT)
+    }
+
+    fun saveTodo(shoppingItem: ShoppingItem) {
+        Thread {
+            var newId = AppDatabase.getInstance(this).shoppingItemDao().addItem(shoppingItem)
+            shoppingItem.itemId = newId
+            runOnUiThread {
+                shoppingListAdapter.addItem(shoppingItem)
+            }
+        }.start()
+    }
+
+    override fun itemCreated(item: ShoppingItem) {
+        saveTodo(item)
+    }
+
+    override fun itemUpdated(item: ShoppingItem) {
+        Thread {
+            AppDatabase.getInstance(this).shoppingItemDao().updateItem(item)
+            runOnUiThread {
+                shoppingListAdapter.updateItemOnPosition(item, editIndex)
+            }
+        }.start()
     }
 }

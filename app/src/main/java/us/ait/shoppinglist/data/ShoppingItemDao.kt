@@ -6,18 +6,18 @@ import androidx.room.*
 interface ShoppingItemDao {
 
     @Query("SELECT * FROM shoppingitem")
-    fun getAllTodo() : List<ShoppingItem>
+    fun getAllItems() : List<ShoppingItem>
 
     @Insert
-    fun addTodo(todo: ShoppingItem) : Long
+    fun addItem(shoppingItem: ShoppingItem) : Long
 
     @Delete
-    fun deleteTodo(todo: ShoppingItem)
+    fun deleteItem(shoppingItem: ShoppingItem)
 
     @Update
-    fun updateTodo(todo: ShoppingItem)
+    fun updateItem(shoppingItem: ShoppingItem)
 
     @Query("DELETE FROM shoppingitem")
-    fun deleteAllTodo()
+    fun deleteAllItems()
 
 }

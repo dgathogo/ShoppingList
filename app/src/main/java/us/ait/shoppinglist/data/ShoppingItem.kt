@@ -9,8 +9,8 @@ import java.io.Serializable
 data class ShoppingItem(
     @PrimaryKey(autoGenerate = true) var itemId: Long?,
     @ColumnInfo(name = "name") var itemName: String,
+    @ColumnInfo(name = "price") var itemPrice: Long,
     @ColumnInfo(name = "category") var itemCategory: String,
     @ColumnInfo(name = "description") var itemDescription: String,
-    @ColumnInfo(name = "price") var itemPrice: Long,
-    @ColumnInfo(name = "status") var itemStatus: Boolean
+    @ColumnInfo(name = "purchased") var purchased: Boolean
 ): Serializable
