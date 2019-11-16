@@ -38,24 +38,25 @@ class ShoppingListAdapter : Adapter<ShoppingListAdapter.ViewHolder>, ShoppingTou
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var item = shoppingList.get(holder.adapterPosition)
-        holder.cbPurchased.text = item.itemName
+//        holder.cbPurchased.text = item.itemName
         holder.cbPurchased.isChecked = item.purchased
 
         holder.tvPrice.text = item.itemPrice.toString()
+        holder.tvName.text = item.itemName
 
-        // TODO(implement the categories)
-        when (item.itemCategory) {
-            0 -> holder.itemIcon.setImageResource(R.drawable.ic_add_circle_outline)
-            1 -> holder.itemIcon.setImageResource(R.drawable.ic_add_circle_outline)
-            2 -> holder.itemIcon.setImageResource(R.drawable.ic_launcher_foreground)
-            3 -> holder.itemIcon.setImageResource(R.drawable.ic_launcher_background)
-            4 -> holder.itemIcon.setImageResource(R.drawable.ic_launcher_background)
+        var icon :Int =
+            when (item.itemCategory) {
+            0 -> R.drawable.food
+            1 -> R.drawable.clothing
+            2 -> R.drawable.books
+            3 -> R.drawable.electronics
+            4 -> R.drawable.other
             else -> {
                 throw RuntimeException("The category does not exist")
             }
         }
 
-        holder.tvName.text = item.itemName
+        holder.itemIcon.setImageResource(icon)
 
         holder.btnDelete.setOnClickListener {
             deleteItem(holder.adapterPosition)

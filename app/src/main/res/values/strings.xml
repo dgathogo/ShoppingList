@@ -5,7 +5,6 @@
     <string-array name="Categories">
         <item>Food</item>
         <item>Clothing</item>
-        <item>Jewelry</item>
         <item>Books</item>
         <item>Electronics</item>
         <item>Other</item>
