@@ -35,7 +35,7 @@ class ShoppingDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
             shoppingHandler = context
         } else {
             throw RuntimeException(
-                "The activity does not implement the ShoppingHandlerInterface"
+                getString(R.string.error_interface_not_implemented)
             )
         }
 
@@ -44,7 +44,7 @@ class ShoppingDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireContext())
 
-        builder.setTitle("New Shopping Item")
+        builder.setTitle(getString(R.string.new_item_title))
 
         val rootView = requireActivity().layoutInflater.inflate(
             R.layout.new_item_dialog, null
@@ -69,12 +69,12 @@ class ShoppingDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
 
         spinnerItemCategory.adapter = adapter
 
-        etItemDescription.setText("No Description")
+        etItemDescription.setText(getString(R.string.default_description))
 
         isEditMode = (arguments != null) && arguments!!.containsKey(ScrollingActivity.KEY_ITEM)
 
         if (isEditMode) {
-            builder.setTitle("Edit Shopping Item")
+            builder.setTitle(getString(R.string.edit_item_title))
             var shoppingItem =
                 arguments?.getSerializable(ScrollingActivity.KEY_ITEM) as ShoppingItem
 
@@ -95,9 +95,9 @@ class ShoppingDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
         val positiveButton = (dialog as AlertDialog).getButton(Dialog.BUTTON_POSITIVE)
         positiveButton.setOnClickListener {
             if (etItemName.text.isEmpty()) {
-                etItemName.error = "This field cannot be empty"
+                etItemName.error = getString(R.string.error_empty_field)
             } else if (etItemPrice.text.isEmpty()) {
-                etItemPrice.error = "This field cannot be empty"
+                etItemPrice.error = getString(R.string.error_empty_field)
             } else {
                 if (isEditMode) {
                     handleShoppingItemEdit()

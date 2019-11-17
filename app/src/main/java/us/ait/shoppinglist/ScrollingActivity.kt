@@ -45,8 +45,8 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
         if (!wasStartedBefore()) {
             MaterialTapTargetPrompt.Builder(this)
                 .setTarget(R.id.fab)
-                .setPrimaryText("New item")
-                .setSecondaryText("Click here to create new items")
+                .setPrimaryText(getString(R.string.new_item))
+                .setSecondaryText(getString(R.string.new_item_helper))
                 .show()
             saveWasStarted()
         }

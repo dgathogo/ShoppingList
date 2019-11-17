@@ -54,7 +54,7 @@ class ShoppingListAdapter : Adapter<ShoppingListAdapter.ViewHolder>, ShoppingTou
                 3 -> R.drawable.electronics
                 4 -> R.drawable.other
                 else -> {
-                    throw RuntimeException("The category does not exist")
+                    throw RuntimeException(context.getString(R.string.error_missing_category))
                 }
             }
 

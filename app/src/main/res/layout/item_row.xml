@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    card_view:cardBackgroundColor="#fff6a0"
+    card_view:cardBackgroundColor="#C4F17C"
     card_view:cardCornerRadius="4dp"
     card_view:cardElevation="4dp">
 
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="placeholder"
+            android:text="@string/placeholder"
             android:textSize="18sp"
             card_view:layout_constraintStart_toEndOf="@+id/cbPurchased"
             card_view:layout_constraintTop_toTopOf="parent" />
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="placeholder"
+            android:text="@string/placeholder"
             android:textSize="18sp"
             card_view:layout_constraintStart_toStartOf="@+id/tvName"
             card_view:layout_constraintTop_toBottomOf="@+id/tvName" />
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="Delete"
+            android:text="@string/delete_btn"
             card_view:layout_constraintBottom_toBottomOf="@+id/btnEdit"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintTop_toTopOf="@+id/btnEdit" />
@@ -57,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="Edit"
+            android:text="@string/edit_btn"
             card_view:layout_constraintBottom_toBottomOf="@+id/btnDetails"
             card_view:layout_constraintEnd_toStartOf="@+id/btnDelete"
             card_view:layout_constraintStart_toEndOf="@+id/btnDetails"
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="Details"
+            android:text="@string/details_btn"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toBottomOf="@+id/itemIcon" />

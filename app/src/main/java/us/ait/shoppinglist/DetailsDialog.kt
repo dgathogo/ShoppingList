@@ -14,7 +14,7 @@ class DetailsDialog : DialogFragment() {
 
         val builder = AlertDialog.Builder(requireContext())
 
-        builder.setTitle("Item Details")
+        builder.setTitle(getString(R.string.details_title))
 
         val rootView = requireActivity().layoutInflater.inflate(
             R.layout.shopping_item_details, null
@@ -38,7 +38,7 @@ class DetailsDialog : DialogFragment() {
                 3 -> R.drawable.electronics
                 4 -> R.drawable.other
                 else -> {
-                    throw RuntimeException("The category does not exist")
+                    throw RuntimeException(context?.getString(R.string.error_missing_category))
                 }
             }
         rootView.itemIcon.setImageResource(icon)

@@ -12,8 +12,8 @@
 
     <ImageView
         android:id="@+id/itemIcon"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_margin="16dp"
         card_view:layout_constraintStart_toStartOf="parent"
         card_view:layout_constraintTop_toTopOf="parent" />
@@ -24,38 +24,35 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layout_marginTop="16dp"
-        android:text="placeholder"
-        android:textSize="15sp"
+        android:text="@string/placeholder"
         card_view:layout_constraintStart_toEndOf="@+id/textView4"
         card_view:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvPrice"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="placeholder"
-        android:textSize="15sp"
+        android:text="@string/placeholder"
         card_view:layout_constraintStart_toEndOf="@+id/textView5"
         card_view:layout_constraintTop_toBottomOf="@+id/tvName" />
 
     <CheckBox
         android:id="@+id/cbBought"
+        style="@style/customTextViewStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:text="Purchased"
+        android:text="@string/purchased_check_box"
         card_view:layout_constraintStart_toEndOf="@+id/itemIcon"
-        card_view:layout_constraintTop_toBottomOf="@+id/textView" />
+        card_view:layout_constraintTop_toBottomOf="@+id/tvCategory" />
 
     <TextView
         android:id="@+id/tvDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="TextView"
+        android:text="@string/placeholder"
         card_view:layout_constraintEnd_toEndOf="parent"
         card_view:layout_constraintStart_toStartOf="parent"
         card_view:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -65,7 +62,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Item:"
+        android:text="@string/item"
+        android:textStyle="bold"
         card_view:layout_constraintBottom_toBottomOf="@+id/tvName"
         card_view:layout_constraintStart_toEndOf="@+id/itemIcon"
         card_view:layout_constraintTop_toTopOf="@+id/tvName" />
@@ -75,7 +73,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Price:"
+        android:text="@string/price"
+        android:textStyle="bold"
         card_view:layout_constraintStart_toEndOf="@+id/itemIcon"
         card_view:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -84,7 +83,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Category:"
+        android:text="@string/type"
+        android:textStyle="bold"
         card_view:layout_constraintStart_toEndOf="@+id/itemIcon"
         card_view:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -93,7 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="placeholder"
+        android:text="@string/placeholder"
         card_view:layout_constraintStart_toEndOf="@+id/textView"
         card_view:layout_constraintTop_toBottomOf="@+id/tvPrice" />
 
@@ -102,10 +102,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Item Description"
-        android:textSize="20sp"
-        card_view:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/item_description"
+        android:textSize="18sp"
+        android:textStyle="bold"
         card_view:layout_constraintStart_toStartOf="parent"
-        card_view:layout_constraintTop_toBottomOf="@+id/itemIcon" />
+        card_view:layout_constraintTop_toBottomOf="@+id/cbBought" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

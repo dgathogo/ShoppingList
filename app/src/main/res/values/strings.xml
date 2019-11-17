@@ -1,6 +1,27 @@
 <resources>
     <string name="app_name">Shopping List</string>
     <string name="action_settings">Settings</string>
+    <string name="error_missing_category">The category does not exist</string>
+    <string name="new_item">New item</string>
+    <string name="new_item_helper">Click here to create new items</string>
+    <string name="default_description">No Description</string>
+    <string name="edit_item_title">Edit Shopping Item</string>
+    <string name="error_empty_field">This field cannot be empty</string>
+    <string name="error_interface_not_implemented">The activity does not implement the ShoppingHandlerInterface</string>
+    <string name="new_item_title">New Shopping Item</string>
+    <string name="details_title">Item Details</string>
+    <string name="placeholder">placeholder</string>
+    <string name="delete_btn">Delete</string>
+    <string name="edit_btn">Edit</string>
+    <string name="details_btn">Details</string>
+    <string name="item_name_hint">Item Name</string>
+    <string name="price_hint">0.0</string>
+    <string name="description_hint">Description</string>
+    <string name="purchased_check_box">Purchased</string>
+    <string name="item">Item:</string>
+    <string name="price">Price:</string>
+    <string name="type">Type:</string>
+    <string name="item_description">Item Description</string>
 
     <string-array name="Categories">
         <item>Food</item>
