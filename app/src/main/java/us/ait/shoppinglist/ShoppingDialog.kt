@@ -118,7 +118,7 @@ class ShoppingDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
         ) as ShoppingItem
         itemToEdit.itemName = etItemName.text.toString()
         itemToEdit.itemPrice = etItemPrice.text.toString().toLong()
-        itemToEdit.itemDescription = etItemName.text.toString()
+        itemToEdit.itemDescription = etItemDescription.text.toString()
         itemToEdit.itemCategory = spinnerItemCategory.selectedItemPosition
 
         shoppingHandler.itemUpdated(itemToEdit)
