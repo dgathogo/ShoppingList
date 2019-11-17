@@ -21,10 +21,14 @@ class DetailsDialog : DialogFragment() {
         )
         var shoppingItem =
             arguments?.getSerializable(ScrollingActivity.KEY_ITEM) as ShoppingItem
-        rootView.tvName.setText(shoppingItem.itemName)
-        rootView.tvPrice.setText(shoppingItem.itemPrice.toString())
-        rootView.tvDescription.setText(shoppingItem.itemDescription)
+        rootView.tvName.text = shoppingItem.itemName
+        rootView.tvPrice.text = shoppingItem.itemPrice.toString()
+        rootView.tvDescription.text = shoppingItem.itemDescription
         rootView.cbBought.isChecked = shoppingItem.purchased
+
+        var categories = resources.getStringArray(R.array.Categories)
+        rootView.tvCategory.text = categories[shoppingItem.itemCategory]
+
 
         var icon =
             when (shoppingItem.itemCategory) {
@@ -38,6 +42,8 @@ class DetailsDialog : DialogFragment() {
                 }
             }
         rootView.itemIcon.setImageResource(icon)
+
+
         builder.setView(rootView)
 
         builder.setNegativeButton("Dismiss") { _, _ -> }

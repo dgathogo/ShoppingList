@@ -21,7 +21,7 @@ class ShoppingRecyclerTouchCallBack(private val todoTouchHelperAdapter: Shopping
     ): Int {
         val dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN
         val swipeFlags = ItemTouchHelper.START or ItemTouchHelper.END
-        return ItemTouchHelper.Callback.makeMovementFlags(dragFlags, swipeFlags)
+        return makeMovementFlags(dragFlags, swipeFlags)
     }
 
     override fun onMove(

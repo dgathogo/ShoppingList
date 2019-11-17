@@ -52,13 +52,13 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
         }
     }
 
-    fun saveWasStarted() {
+    private fun saveWasStarted() {
         var sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
         var editor = sharedPref.edit()
         editor.apply()
     }
 
-    fun wasStartedBefore(): Boolean {
+    private fun wasStartedBefore(): Boolean {
         var sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
         return sharedPref.getBoolean(KEY_STARTED, false)
     }
@@ -85,7 +85,7 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
         }.start()
     }
 
-    fun showAddShoppingItemDialog() {
+    private fun showAddShoppingItemDialog() {
         ShoppingDialog().show(supportFragmentManager, TAG_ITEM_DIALOG)
     }
 
@@ -108,7 +108,7 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
         detailsDialog.show(supportFragmentManager, TAG_ITEM_DETAILS)
     }
 
-    fun saveTodo(shoppingItem: ShoppingItem) {
+    private fun saveTodo(shoppingItem: ShoppingItem) {
         Thread {
             var newId = AppDatabase.getInstance(this).shoppingItemDao().addItem(shoppingItem)
             shoppingItem.itemId = newId

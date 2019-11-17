@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <EditText
         android:id="@+id/etName"
-        android:hint="Item Name"
-        android:text=""
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:hint="Item Name"
+        android:text="" />
 
     <Spinner
         android:id="@+id/spCategory"
-        android:text=""
-        android:inputType="number"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:inputType="number"
+        android:text="" />
 
     <EditText
         android:id="@+id/etDescription"
-        android:hint="Description"
-        android:text=""
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:hint="Description"
+        android:text="" />
 
     <EditText
         android:id="@+id/etPrice"
-        android:hint="0.0"
-        android:text=""
-        android:inputType="numberDecimal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:hint="0.0"
+        android:inputType="numberDecimal"
+        android:text="" />
 
 </LinearLayout>

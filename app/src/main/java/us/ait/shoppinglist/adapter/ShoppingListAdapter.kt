@@ -9,14 +9,13 @@ import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.*
+import androidx.recyclerview.widget.RecyclerView.Adapter
 import kotlinx.android.synthetic.main.item_row.view.*
 import us.ait.shoppinglist.R
 import us.ait.shoppinglist.ScrollingActivity
 import us.ait.shoppinglist.data.AppDatabase
 import us.ait.shoppinglist.data.ShoppingItem
 import us.ait.shoppinglist.touch.ShoppingTouchHelperCallBack
-import java.lang.RuntimeException
 import java.util.*
 
 class ShoppingListAdapter : Adapter<ShoppingListAdapter.ViewHolder>, ShoppingTouchHelperCallBack {
@@ -47,17 +46,17 @@ class ShoppingListAdapter : Adapter<ShoppingListAdapter.ViewHolder>, ShoppingTou
         holder.tvPrice.text = item.itemPrice.toString()
         holder.tvName.text = item.itemName
 
-        var icon :Int =
+        var icon: Int =
             when (item.itemCategory) {
-            0 -> R.drawable.food
-            1 -> R.drawable.clothing
-            2 -> R.drawable.books
-            3 -> R.drawable.electronics
-            4 -> R.drawable.other
-            else -> {
-                throw RuntimeException("The category does not exist")
+                0 -> R.drawable.food
+                1 -> R.drawable.clothing
+                2 -> R.drawable.books
+                3 -> R.drawable.electronics
+                4 -> R.drawable.other
+                else -> {
+                    throw RuntimeException("The category does not exist")
+                }
             }
-        }
 
         holder.itemIcon.setImageResource(icon)
 
@@ -98,7 +97,7 @@ class ShoppingListAdapter : Adapter<ShoppingListAdapter.ViewHolder>, ShoppingTou
         }.start()
     }
 
-    fun deleteItem(index: Int) {
+    private fun deleteItem(index: Int) {
         Thread {
             AppDatabase.getInstance(context).shoppingItemDao().deleteItem(shoppingList[index])
             (context as ScrollingActivity).runOnUiThread {
@@ -113,7 +112,7 @@ class ShoppingListAdapter : Adapter<ShoppingListAdapter.ViewHolder>, ShoppingTou
         notifyItemChanged(index)
     }
 
-    fun updateItem(item: ShoppingItem) {
+    private fun updateItem(item: ShoppingItem) {
         Thread {
             AppDatabase.getInstance(context).shoppingItemDao().updateItem(item)
         }.start()

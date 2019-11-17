@@ -16,7 +16,8 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.acitivity_splash)
         var demoAnim = AnimationUtils.loadAnimation(
             this@SplashActivity,
-            R.anim.splash_animation)
+            R.anim.splash_animation
+        )
         ivIcon.startAnimation(demoAnim)
         Handler().postDelayed({
             val intent = Intent(this, ScrollingActivity::class.java)
