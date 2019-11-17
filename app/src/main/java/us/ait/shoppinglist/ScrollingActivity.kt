@@ -1,5 +1,7 @@
 package us.ait.shoppinglist
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatActivity
@@ -15,11 +17,12 @@ import us.ait.shoppinglist.touch.ShoppingRecyclerTouchCallBack
 class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
 
     companion object {
-        val KEY_ITEM = "KEY_ITEM"
-        val KEY_STARTED = "KEY_STARTED"
-        val TAG_ITEM_DIALOG = "TAG_ITEM_DIALOG"
-        val TAG_ITEM_EDIT = "TAG_ITEM_EDIT"
-        val TAG_ITEM_DETAILS = "TAG_ITEM_DETAILS"
+        const val KEY_ITEM = "KEY_ITEM"
+        const val KEY_STARTED = "KEY_STARTED"
+        const val TAG_ITEM_DIALOG = "TAG_ITEM_DIALOG"
+        const val TAG_ITEM_EDIT = "TAG_ITEM_EDIT"
+        const val TAG_ITEM_DETAILS = "TAG_ITEM_DETAILS"
+        const val MY_PREFS = "MY PREFERENCES"
     }
 
     lateinit var shoppingListAdapter: ShoppingListAdapter
@@ -53,13 +56,14 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
     }
 
     private fun saveWasStarted() {
-        var sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
+        var sharedPref = getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE)
         var editor = sharedPref.edit()
+        editor.putBoolean(KEY_STARTED, true)
         editor.apply()
     }
 
     private fun wasStartedBefore(): Boolean {
-        var sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
+        var sharedPref = getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE)
         return sharedPref.getBoolean(KEY_STARTED, false)
     }
 
