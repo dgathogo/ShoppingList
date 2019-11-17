@@ -69,6 +69,8 @@ class ShoppingDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
 
         spinnerItemCategory.adapter = adapter
 
+        etItemDescription.setText("No Description")
+
         isEditMode = (arguments != null) && arguments!!.containsKey(ScrollingActivity.KEY_ITEM)
 
         if (isEditMode) {
