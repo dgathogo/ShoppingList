@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import kotlinx.android.synthetic.main.acitivity_splash.view.*
 import kotlinx.android.synthetic.main.shopping_item_details.view.*
 import us.ait.shoppinglist.data.ShoppingItem
 
@@ -38,10 +37,10 @@ class DetailsDialog : DialogFragment() {
                     throw RuntimeException("The category does not exist")
                 }
             }
-        rootView.ivIcon.setImageResource(icon)
+        rootView.itemIcon.setImageResource(icon)
         builder.setView(rootView)
 
-        builder.setNegativeButton("Cancel") { _, _ -> }
+        builder.setNegativeButton("Dismiss") { _, _ -> }
 
         return builder.create()
     }

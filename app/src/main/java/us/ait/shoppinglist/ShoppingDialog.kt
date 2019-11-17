@@ -82,10 +82,8 @@ class ShoppingDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
             spinnerItemCategory.setSelection(shoppingItem.itemCategory)
         }
 
-        builder.setPositiveButton("SAVE") { dialog, witch ->
-            // empty
-        }
-
+        builder.setPositiveButton("SAVE") { _, _ -> }
+        builder.setNegativeButton("CANCEL") { _, _ -> }
         return builder.create()
     }
 
@@ -94,17 +92,17 @@ class ShoppingDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
 
         val positiveButton = (dialog as AlertDialog).getButton(Dialog.BUTTON_POSITIVE)
         positiveButton.setOnClickListener {
-            if (etItemName.text.isNotEmpty()) {
+            if (etItemName.text.isEmpty()) {
+                etItemName.error = "This field cannot be empty"
+            } else if (etItemPrice.text.isEmpty()) {
+                etItemPrice.error = "This field cannot be empty"
+            } else {
                 if (isEditMode) {
                     handleShoppingItemEdit()
                 } else {
                     handleShoppingItemCreate()
                 }
-
                 (dialog as AlertDialog).dismiss()
-            } else {
-                etItemName.error = "This field can not be empty"
-//                TODO("handle multiple required fields")
             }
         }
     }

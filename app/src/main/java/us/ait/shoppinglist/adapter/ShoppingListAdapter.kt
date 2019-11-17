@@ -4,6 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.*
 import kotlinx.android.synthetic.main.item_row.view.*
@@ -37,8 +41,7 @@ class ShoppingListAdapter : Adapter<ShoppingListAdapter.ViewHolder>, ShoppingTou
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var item = shoppingList.get(holder.adapterPosition)
-//        holder.cbPurchased.text = item.itemName
+        var item = shoppingList[holder.adapterPosition]
         holder.cbPurchased.isChecked = item.purchased
 
         holder.tvPrice.text = item.itemPrice.toString()
@@ -123,13 +126,13 @@ class ShoppingListAdapter : Adapter<ShoppingListAdapter.ViewHolder>, ShoppingTou
 
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val cbPurchased = itemView.cbPurchased
-        val tvName = itemView.tvName
-        val tvPrice = itemView.tvPrice
-        val btnDelete = itemView.btnDelete
-        val btnEdit = itemView.btnEdit
-        val btnDetails = itemView.btnDetails
-        val itemIcon = itemView.itemIcon
+        val cbPurchased: CheckBox = itemView.cbPurchased
+        val tvName: TextView = itemView.tvName
+        val tvPrice: TextView = itemView.tvPrice
+        val btnDelete: Button = itemView.btnDelete
+        val btnEdit: Button = itemView.btnEdit
+        val btnDetails: Button = itemView.btnDetails
+        val itemIcon: ImageView = itemView.itemIcon
     }
 
 }
