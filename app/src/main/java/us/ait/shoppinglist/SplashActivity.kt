@@ -23,7 +23,7 @@ class SplashActivity : AppCompatActivity() {
             val intent = Intent(this, ScrollingActivity::class.java)
             startActivity(intent)
             finish()
-        }, 1500)
+        }, 1200)
 
     }
 }
